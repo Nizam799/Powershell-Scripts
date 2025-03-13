@@ -1,5 +1,7 @@
 
-$subscriptionID = "5e0ec067-7409-4ede-ae47-ed0926bad2ee" #action group subscriptionID
+#This code can be used to deploy alert rules on all vms in a subscription
+
+$subscriptionID = "<subID>" #action group subscriptionID
 
 Set-AzContext -Subscription $subscriptionID
 
@@ -78,7 +80,7 @@ foreach ($vm in $vms){
  Add-AzMetricAlertRuleV2 `
     -Name "$ClientName - Virtual machines - $VMname - PercentageCPU - Critical" `
     -ResourceGroupName $resourceGroupName `
-    -WindowSize 0:30 `
+    -WindowSize 1:0:0:0 ` # for 24hours time selection
     -Frequency 0:15 `
     -TargetResourceScope "/subscriptions/$subscriptionID/resourceGroups/$resourceGroupName/providers/Microsoft.Compute/virtualMachines/$VMname" `
     -TargetResourceType "Microsoft.Compute/virtualMachines" `

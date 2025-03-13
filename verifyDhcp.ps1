@@ -1,3 +1,5 @@
+#Script to verfy DHCP is enabled or not
+
 $ss = get-content -Path "C:\users\snp\desktop\dh.txt"
 
 $output = @()

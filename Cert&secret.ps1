@@ -1,3 +1,5 @@
+#This Code can be used to get notifications on expiring client secrets and certificates in app registrations
+
 $spcred = Get-AutomationPSCredential -Name "AppCredentials"
 
 $tenant = "<tenantID>"

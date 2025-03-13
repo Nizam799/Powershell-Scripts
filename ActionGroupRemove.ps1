@@ -1,4 +1,6 @@
-$path = "C:\Users\MohammedNizamuddin\Documents\BerdonAgs.xlsx"
+#This script can be used to remove action groups from alert rules
+
+$path = "C:\Users\MohammedNizamuddin\Documents\Action.xlsx"
 $all = Import-Excel -path $path
 
 $sub = "<subID>"

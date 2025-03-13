@@ -1,3 +1,5 @@
+#Script to configure alerts on storage account
+
 $agname="backup_alert"
 $agrg ="myrg"
 $agsub="<subID>" #subID for action group
@@ -10,7 +12,6 @@ $condition1 = New-AzMetricAlertRuleV2Criteria `
  -TimeAggregation Average `
  -Operator LessThan `
  -Threshold 90
-
 
 $condition4 = New-AzMetricAlertRuleV2Criteria `
  -MetricName "Successe2eLatency" `

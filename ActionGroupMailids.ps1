@@ -1,3 +1,7 @@
+
+
+#This Script fetches the information of each action group with its mail IDs.
+
 $subscriptions = Get-AzSubscription # Either take all subscription in your tenant or take individual subscription IDs
 $allsubs = $subscriptions.Id
 # $allsubs = "<subID>" , "<subID>"

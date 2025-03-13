@@ -1,4 +1,6 @@
 
+#This script fetches details of alert rule with their action group names
+
 
 $subscriptions = "<subID>" , "<subID>"
 $results = @()
@@ -30,7 +32,7 @@ foreach($id in $subscriptions){
     }
 }
 
-$excelPath = "C:\Users\MohammedNizamuddin\Documents\EriezMetrics.xlsx"
+$excelPath = "C:\Users\MohammedNizamuddin\Documents\Metrics.xlsx"
 # Export the results to an Excel file
 $results | Export-Excel -Path $excelPath -AutoSize -WorkSheetname "Alerts"
 

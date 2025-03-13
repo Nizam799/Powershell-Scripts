@@ -1,4 +1,6 @@
 
+#Script to get details of metrics/Alert rules
+
 $subs = "<subID>" , "<subID>"
 foreach($sub in $subs){
     set-azcontext -subscriptionid $sub

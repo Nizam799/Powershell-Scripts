@@ -1,3 +1,4 @@
+#Use this code for getting a backup policy report
 
 $subs = "<subID>" , "<subID>"
 $out = @()
@@ -19,7 +20,6 @@ foreach($sub in $subs){
             foreach ($backupItem in $backupItems){
                 $backupItem
                 $poid = $backupitem.PolicyId
-
                 $policy = Get-AzRecoveryServicesBackupProtectionPolicy -VaultId $vault.ID | where-object {$_.id -eq $poid}
                 $ptype = $policy.policysubtype
                 $ptime = $policy.schedulepolicy.schedulerunfrequency

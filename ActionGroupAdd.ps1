@@ -1,6 +1,6 @@
 
 
-#This script Adds Action GRoup to a existing alert rule without removing the old existing action groups
+#This script Adds Action Group to a existing alert rule without removing the old existing action groups
 
 
 $sub1 = "<subID>"
@@ -11,7 +11,7 @@ $agname = "metric-alerts" #actiongroup name
 $agname1 = get-azactiongroup -name $agname -ResourceGroupName $rg1
 $ag1 = [Microsoft.Azure.Management.Monitor.Management.Models.ActivityLogAlertActionGroup]::New($agname1.Id)
 
-# $sub2 = "bf663624-45a5-48bd-9854-8aaf0b95c849" 
+# $sub2 = "<subID>" 
 # Set-azcontext -SubscriptionId $sub2   #connect to subscription in which alerts needs to be configured
 
 $path = "C:\Users\MohammedNizamuddin\Documents\book3.xlsx" #importing alerts in excel from local machine 

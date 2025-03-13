@@ -1,8 +1,10 @@
 
+#Use this code to delete alerts on vms which are mentioned in a text file
+
 $subscriptionID = "7572a8a8-2860-4fdb-90db-3e7a00753aa9"
 Set-AzContext -Subscription $subscriptionID
 
-$machine = Get-Content -Path "C:\Users\MohammedNizamuddin\Downloads\rmalerts.txt"
+$machine = Get-Content -Path "C:\Users\MohammedNizamuddin\Downloads\rmalerts.txt" # text file with vm names
 #txt file contains names of VMs for which alert rules needs to be removed
 
 

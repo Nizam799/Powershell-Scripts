@@ -1,4 +1,4 @@
-# Define your resource group and VM name
+# This script can be used to get details of disk whther its a managed disk or unmanaged
 $subs = "<" , "<subId>"
 
 foreach($sub in $subs){

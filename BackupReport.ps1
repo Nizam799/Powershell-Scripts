@@ -1,4 +1,6 @@
 
+#Use this code for getting a detailed backup report on VMs
+
 $subs = "<subscriptionID>"
 $out = @()
 foreach($sub in $subs){
