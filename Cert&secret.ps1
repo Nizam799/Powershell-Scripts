@@ -1,8 +1,7 @@
-#This Code can be used to get notifications on expiring client secrets and certificates in app registrations
 
 $spcred = Get-AutomationPSCredential -Name "AppCredentials"
 
-$tenant = "<tenantID>"
+$tenant = "927d51f7-0f22-40f7-b6f4-a1f1bd89b967"
 
 Connect-MgGraph -TenantId $tenant -Credential $spcred
 
@@ -10,12 +9,12 @@ Connect-MgGraph -TenantId $tenant -Credential $spcred
 Write-Output " "
 Write-Output " "
 
-$userId = "itops@abc.com" 
-$to = "itops@abc.com" 
-$Cc = "clouddesk@abc.com"
+$userId = "itops@mhainc.com" 
+$to = "itops@mhainc.com" 
+$Cc = "clouddesk@snp.com"
 
 $DateToday = Get-Date
-$Duration=90; 
+$Duration=100; 
 $appregistrations= Get-MgApplication -All
 
 foreach ($appreg in $appregistrations) {         
@@ -42,7 +41,10 @@ foreach ($appreg in $appregistrations) {
 
             App ID: $($appreg.appId)
 
-            Key ID: $($passcred.keyId)"
+            Key ID: $($passcred.keyId)
+            
+            
+            "
 
             
             $message = @{
@@ -94,7 +96,9 @@ foreach ($appreg in $appregistrations) {
 
             App ID: $($appreg.appId)
 
-            Certificate ID: $($certificate.keyId)"      
+            Certificate ID: $($certificate.keyId)
+            
+            "      
                 
 
             $message = @{
@@ -125,3 +129,67 @@ foreach ($appreg in $appregistrations) {
         }
     }
 }
+
+$Enterprise= Get-MgServicePrincipal -All
+
+foreach($Entapp in $Enterprise){
+    $Ent = $Entapp.PasswordCredentials
+    if($Ent.count -gt 0){
+
+        foreach($Entcred in $Ent){
+            $ExpiryDate = $Entcred.endDateTime
+            $DaysRemaining = (New-TimeSpan -Start $DateToday -End $ExpiryDate).Days
+            
+            if ($DaysRemaining -lt $Duration -and $DaysRemaining -ge 0){
+                Write-Output "Display name: $($Entapp.displayName)"
+                Write-Output "Days left:  $DaysRemaining "
+                Write-Output "End date time: $($ExpiryDate)"
+                Write-Output "Type: Enterprise App Certificate/Credential/Secret"
+
+                $subject3 = "Certificate/Credential Expiring for $($Entapp.displayName)"
+                $body3 = "Hi Team, 
+
+                A Certificate/Credential is expiring from Enterprise Applications in $($DaysRemaining) Days.
+
+                Display Name: $($Entapp.displayName)
+
+                Expiration Date: $ExpiryDate
+
+                App ID: $($Entapp.appId)
+
+                Key/Certificate ID: $($Entcred.keyId) 
+                
+                
+                 
+                    "
+
+                $message = @{
+                    subject = $subject3
+                    body = @{
+                        contentType = "Text"
+                        content = $body3
+                    }
+                    toRecipients = @(@{emailAddress = @{address = $to}})
+                    ccRecipients = @(@{emailAddress = @{address = $Cc}})
+                    # saveToSentItems = $true 
+                }
+                # Send the email
+
+                try {
+                    Send-MgUserMail -UserId $userId -Message $message
+                    write-output "Mail sent successfully to $to"
+                    Write-Output " "
+                    Write-Output " "
+                }
+                catch {
+                    Write-Host "An error occurred:" -ForegroundColor Red
+                    Write-Host $_.Exception.Message -ForegroundColor Yellow
+                    Write-Host "Detailed error information:"
+                    $_ | Format-List * -Force
+                }
+            }
+        }
+    }
+}
+
+
