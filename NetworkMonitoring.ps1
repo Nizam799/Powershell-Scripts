@@ -54,10 +54,10 @@ $cc = "mdamear453@gmail.com"
 $subject = "Network Bandwidth between Sql servers "
 $date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
-$filePath = "BandwidthReport_$(Get-Date -Format 'yyyyMMdd_HHmmss').xlsx"  # Path to your Excel file
+$fileName = "BandwidthReport_$(Get-Date -Format 'yyyyMMdd_HHmmss').xlsx"  # Path to your Excel file
 
 # Read the file and encode it in Base64
-$fileName = Split-Path $filePath -Leaf
+$filePath = Join-Path $env:RUNNER_TEMP $fileName
 $fileBytes = [System.IO.File]::ReadAllBytes($filePath)
 $fileBase64 = [System.Convert]::ToBase64String($fileBytes)
 $body = "Hi Team,
