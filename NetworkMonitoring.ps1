@@ -43,7 +43,7 @@ NTANetAnalytics
 
 $results = Invoke-AzOperationalInsightsQuery -WorkspaceId $WorkspaceId -Query $query
 
-$results.Results | Export-Excel -Path "BandwidthReport_$(Get-Date -Format 'yyyyMMdd_HHmmss').xlsx"
+$results.Results | Export-Excel -Path "BandwidthReport_$(Get-Date -Format 'yyyyMMdd').xlsx"
 Write-Host "Query ran successfully"
 
 Connect-MgGraph -TenantId $tenant -Credential $creds 
@@ -52,9 +52,9 @@ $to = "mohammednizamuddin@snp.com"
 $cc = "mdamear453@gmail.com"
 
 $subject = "Network Bandwidth between Sql servers "
-$date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$date = Get-Date -Format "yyyy-MM-dd"
 
-$fileName = "BandwidthReport_$(Get-Date -Format 'yyyyMMdd_HHmmss').xlsx"  # Path to your Excel file
+$fileName = "BandwidthReport_$(Get-Date -Format 'yyyyMMdd').xlsx"  # Path to your Excel file
 
 # Read the file and encode it in Base64
 $filePath = Join-Path $env:RUNNER_TEMP $fileName
