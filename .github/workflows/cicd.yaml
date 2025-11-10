@@ -1,0 +1,26 @@
+name: Run Powershell script to get Network monitoring Report
+
+on:
+    schedule:
+        - cron: "30 8 * * *"
+    
+    workflow_dispatch:
+
+jobs:
+ Run_script:
+    runs-on: Windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Installs modules
+        run: |
+         Install-Module -Name Az.Accounts, Az.OperationalInsights, ImportExcel, Microsoft.Graph.Authentication, Microsoft.Graph.Users.Actions -Scope CurrentUser -Force
+
+      - name: Running script
+        run: |
+         pwsh ./NetworkMonitoring.ps1
+        env:
+            TENANT_ID: ${{vars.TENANT_ID}}
+            APP_ID: ${{vars.APP_ID}}
+            SECRET_VALUE: ${{secrets.SECRET_VALUE}}
