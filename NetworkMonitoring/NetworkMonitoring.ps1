@@ -48,6 +48,7 @@ $fileName = "BandwidthReport_$(Get-Date -Format 'yyyyMMdd').xlsx"  #file Name
 $presentdirectory = Get-Location
 
 $filePath = Join-Path $presentdirectory.Path $fileName
+write-host "$filePath"
 
 $results.Results | Export-Excel -Path $filePath
 Write-Host "Query ran successfully"
