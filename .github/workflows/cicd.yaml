@@ -24,3 +24,8 @@ jobs:
             TENANT_ID: ${{vars.TENANT_ID}}
             APP_ID: ${{vars.APP_ID}}
             SECRET_VALUE: ${{secrets.SECRET_VALUE}}
+      - name: Upload Report
+        uses: actions/Upload-artifact@v4
+        with:
+            name: BandwidthReport
+            path: $env:File_path/*.xlsx
