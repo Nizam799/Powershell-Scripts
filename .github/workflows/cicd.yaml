@@ -19,7 +19,7 @@ jobs:
 
       - name: Running script
         run: |
-         pwsh ./NetworkMonitoring.ps1
+         pwsh ./NetworkMonitoring/NetworkMonitorin.ps1
         env:
             TENANT_ID: ${{vars.TENANT_ID}}
             APP_ID: ${{vars.APP_ID}}
