@@ -31,4 +31,4 @@ jobs:
         uses: actions/Upload-artifact@v4
         with:
             name: BandwidthReport
-            path: ${{env.FILE_PATH }}\*.xlsx
+            path: ./*.xlsx
