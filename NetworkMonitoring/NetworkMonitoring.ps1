@@ -45,8 +45,9 @@ $results = Invoke-AzOperationalInsightsQuery -WorkspaceId $WorkspaceId -Query $q
 
 $fileName = "BandwidthReport_$(Get-Date -Format 'yyyyMMdd').xlsx"  #file Name
 
-$pwd = pwd
-$filePath = Join-Path $pwd $fileName
+$presentdirectory = Get-Location
+
+$filePath = Join-Path $presentdirectory.Path $fileName
 
 $results.Results | Export-Excel -Path $filePath
 Write-Host "Query ran successfully"
@@ -87,7 +88,7 @@ $message = @{
           contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           contentBytes = $fileBase64
         }
-    )
+  )
 # saveToSentItems = $true 
 }
 # Send the email
